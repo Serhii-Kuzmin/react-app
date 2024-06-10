@@ -1,4 +1,5 @@
 import { Component } from "react";
+
 import "./employees-add-form.css";
 
 class EmployeesAddForm extends Component {
@@ -9,6 +10,7 @@ class EmployeesAddForm extends Component {
       salary: "",
     };
   }
+
   onValueChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
@@ -17,6 +19,8 @@ class EmployeesAddForm extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
+    // Можно еще и сообщения добавлять, подсветку, атрибуты minlength и тд.
+    if (this.state.name.length < 3 || !this.state.salary) return;
     this.props.onAdd(this.state.name, this.state.salary);
     this.setState({
       name: "",
@@ -48,11 +52,7 @@ class EmployeesAddForm extends Component {
             onChange={this.onValueChange}
           />
 
-          <button
-            type="submit"
-            className="btn btn-outline-light"
-            onSubmit={this.addEmployees}
-          >
+          <button type="submit" className="btn btn-outline-light">
             Добавить
           </button>
         </form>
